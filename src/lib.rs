@@ -74,12 +74,16 @@ async fn handler(qry: HashMap<String, Value>, body: Vec<u8>, account: String) {
 
     match action {
         "create" => {
+            log::debug!("creating record: {}", text);
             record.create(text);
         }
         "update" => {
             let record_id = extract_query(&qry, "record_id");
+
             match record_id {
                 Ok(rid) => {
+                    log::debug!("updating record({}): {}", rid, text);
+
                     record.update(rid, text);
                 }
                 Err((status, headers, body)) => {
