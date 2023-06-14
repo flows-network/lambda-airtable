@@ -32,10 +32,10 @@ pub async fn run() {
 
     let account = env::var("account").unwrap();
 
-    request_received(|qry, _| handler(qry, account)).await;
+    request_received(|qry, body| handler(qry, body, account)).await;
 }
 
-async fn handler(qry: HashMap<String, Value>, account: String) {
+async fn handler(qry: HashMap<String, Value>, body: Vec<u8>, account: String) {
     let action = qry
         .get("action")
         .and_then(|v| v.as_str())
@@ -62,11 +62,12 @@ async fn handler(qry: HashMap<String, Value>, account: String) {
         table_name,
     };
 
-    let text = match qry.get("text") {
-        Some(t) => t.to_owned(),
-        None => {
-            let error = "text must be provide via request query";
-            send_response(400, vec![], error.to_owned().into_bytes());
+    let text = match serde_json::from_slice(&body) {
+        Ok(t) => t,
+        Err(e) => {
+            log::debug!("error occurs when deserialize body: {}", e);
+            let error = "body must be a valid json".to_string();
+            send_response(400, vec![], error.into_bytes());
             return;
         }
     };
