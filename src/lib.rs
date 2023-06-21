@@ -1,4 +1,7 @@
-use std::{collections::HashMap, env};
+use std::{
+    collections::HashMap,
+    env::{self, VarError},
+};
 
 use airtable_flows::{create_record, update_record};
 use dotenv::dotenv;
@@ -31,19 +34,29 @@ pub async fn run() {
     logger::init();
 
     let account = env::var("account").unwrap();
+    let base_id = env::var("base_id");
+    let table_name = env::var("table_name");
 
-    request_received(|qry, body| handler(qry, body, account)).await;
+    request_received(|qry, body| handler(qry, body, account, base_id, table_name)).await;
 }
 
-async fn handler(qry: HashMap<String, Value>, body: Vec<u8>, account: String) {
+async fn handler(
+    qry: HashMap<String, Value>,
+    body: Vec<u8>,
+    account: String,
+    base_id: Result<String, VarError>,
+    table_name: Result<String, VarError>,
+) {
     let action = qry
         .get("action")
         .and_then(|v| v.as_str())
         .unwrap_or("create");
 
     let res = || -> Result<(&str, &str), Response> {
-        let base_id = extract_query(&qry, "base_id")?;
-        let table_name = extract_query(&qry, "table_name")?;
+        let base_id = extract_query(&qry, "base_id")
+            .or_else(|e| base_id.as_ref().map(|x| x.as_str()).map_err(|_| e))?;
+        let table_name = extract_query(&qry, "table_name")
+            .or_else(|e| table_name.as_ref().map(|x| x.as_str()).map_err(|_| e))?;
 
         Ok((base_id, table_name))
     }();

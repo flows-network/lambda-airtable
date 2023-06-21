@@ -1,6 +1,8 @@
 # Config
 env:
 - `account`: Account that bind to AirTable in flows.network
+- `base_id`: AirTable's base_id (Optional)
+- `table_name`: AirTable's table_name (Optional)
 
 # API
 
@@ -13,6 +15,9 @@ common query:
 - `action`: `create` | `update`. The default is `create`
 - `base_id`: AirTable's base_id
 - `table_name`: AirTable's table_name
+
+> By default, `base_id` and `table_name` takes the value of the corresponding environment variable if set.
+> If the environment variable isn't set, they are required.
 
 common body:
 A json represented by `serde_json::Value`. Include only the content in [fields](https://airtable.com/developers/web/api/create-records#request-fields)
