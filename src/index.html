@@ -35,7 +35,7 @@
                 error: function (jqXHR, exception) {
                     console.log("Error Status" + jqXHR.statusText);
                     console.log("Error Resp" + jqXHR.responseText);
-                    alert("服务繁忙，请稍后重试");
+                    alert("The service is busy, please try again later.");
                     $('#process').prop('disabled', false);
                     $('#loading').hide()
                 }
@@ -49,7 +49,7 @@
 <body>
 <div class="container">
     <div class="my-4 text-center">
-        <img src="https://res.cloudinary.com/wasm-reactor/image/upload/v1683413590/extension/airtable_kge588.png"
+        <img src="https://flows.network/logo-with-text.png"
              width="160"/>
     </div>
 
@@ -70,8 +70,8 @@
     </form>
 
     <div style="display: none;" id="success">
-        <span style="margin-top: 8px;color:green">Submit success!</span>
-        <a href="https://flows.network/start">Want to have the same magical work? Visit our website——flows.network</a>
+        <span style="margin-top: 8px;color:green">Your information has been submitted successfully.</span>
+        <a href="https://flows.network/start">Want to have the same magical work? Visit our website —— flows.network</a>
     </div>
 
 </div> <!-- /container -->
