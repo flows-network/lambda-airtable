@@ -1,8 +1,8 @@
 # Config
 env:
-- `account`: Account that bind to AirTable in flows.network
-- `base_id`: AirTable's base_id (Optional)
-- `table_name`: AirTable's table_name (Optional)
+- `account`: Account that binds to Airtable in the flows.network platform.
+- `base_id`: Airtable's base_id (Optional)
+- `table_name`: Airtable's table_name (Optional)
 
 # API
 
@@ -20,7 +20,7 @@ common query:
 > If the environment variable isn't set, they are required.
 
 common body:
-A json represented by `serde_json::Value`. Include only the content in [fields](https://airtable.com/developers/web/api/create-records#request-fields)
+A JSON file represented by `serde_json::Value`. Include only the content in [fields](https://airtable.com/developers/web/api/create-records#request-fields)
 
 ```
 https://airtable.com/appebI0zAKp3fe9qE/tblx8KEJuGHULAoBX/viwaLgNG4EZbE4NMo?blocks=hide
@@ -42,7 +42,7 @@ curl -X POST "<base url>?base_id={base_id}&table_name={table_name}" \
   }'
 ```
 
-> see also: https://airtable.com/developers/web/api/create-records
+> See also: https://airtable.com/developers/web/api/create-records
 
 ### update record
 query:
