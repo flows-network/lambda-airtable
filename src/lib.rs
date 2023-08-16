@@ -6,7 +6,7 @@ use std::{
 use airtable_flows::{create_record, update_record};
 use dotenv::dotenv;
 use flowsnet_platform_sdk::logger;
-use lambda_flows::{request_received, send_response};
+use webhook_flows::{request_received, send_response};
 
 use serde_json::Value;
 
