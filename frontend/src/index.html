@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>create record with flows-network</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+    <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800"
+            rel="stylesheet"
+    />
     <script>
         function callService() {
             const clientName = $('#Name').val();
@@ -69,14 +71,10 @@
                     type="button" class="btn btn-primary" id="process" onclick="return callService()">
         <span style="display: none;" class="spinner-border spinner-border-sm" id="loading" role="status"
               aria-hidden="true"></span>
-                submit
+                Submit
             </button>
-            <div style="display: flex;justify-content: center;align-items: center;padding: 1rem 0;">
-                <div>
-                    pover by
-                </div>
-                <img src="https://flows.network/logo-with-text.png"
-                     width="160"/>
+            <div style="font-size: 0.75rem;color: darkgray;text-align: center;padding: 1rem 0;">
+                Will let you know when we're ready. Stay tuned.
             </div>
         </form>
         <div class="right"
@@ -104,6 +102,9 @@
 </div> <!-- /container -->
 </body>
 <style>
+    body {
+        font-family: Montserrat;
+    }
     .size {
         display: flex;
     }
