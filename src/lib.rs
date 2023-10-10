@@ -6,7 +6,7 @@ use std::{
 use airtable_flows::{create_record, update_record};
 use dotenv::dotenv;
 use flowsnet_platform_sdk::logger;
-use webhook_flows::{request_received, send_response};
+use webhook_flows::{create_endpoint, request_handler, send_response};
 
 use serde_json::Value;
 
@@ -29,24 +29,24 @@ impl Record<'_> {
 
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
-pub async fn run() {
-    dotenv().ok();
-    logger::init();
+pub async fn on_deploy() {
 
+
+    create_endpoint().await;
+}
+
+#[request_handler]
+async fn handler(
+    _headers: Vec<(String, String)>,
+    _subpath: String,
+    qry: HashMap<String, Value>,
+    body: Vec<u8>,
+) {
+    logger::init();
     let account = env::var("account").unwrap();
     let base_id = env::var("base_id");
     let table_name = env::var("table_name");
 
-    request_received(|qry, body| handler(qry, body, account, base_id, table_name)).await;
-}
-
-async fn handler(
-    qry: HashMap<String, Value>,
-    body: Vec<u8>,
-    account: String,
-    base_id: Result<String, VarError>,
-    table_name: Result<String, VarError>,
-) {
     let action = qry
         .get("action")
         .and_then(|v| v.as_str())
