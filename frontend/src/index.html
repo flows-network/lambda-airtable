@@ -68,12 +68,14 @@
                 <label style="padding-right: 20px" for="Email" class="form-label small">Enter your Email</label>
                 <input style="align-self: center;" type="text" class="form-control" id="Email">
             </div>
-            <button style="cursor: pointer;background-color: transparent;border-radius: 0.25rem;border: 1px solid #9955ff;font-weight: 600;color:#9955FF;margin-top: 1rem;line-height: 2rem;"
-                    type="button" class="btn btn-primary" id="process" onclick="return callService()">
+            <div style="position: relative;width: 100%;margin-top: 1rem;">
+                <button style="width: 100%;cursor: pointer;background-color: transparent;border-radius: 0.25rem;line-height: 2rem;"
+                        type="button" class="default btn btn-primary" id="process" onclick="return callService()">
         <span style="display: none;" class="spinner-border spinner-border-sm" id="loading" role="status"
               aria-hidden="true"></span>
-                Submit
-            </button>
+                    Submit
+                </button>
+            </div>
             <div style="font-size: 0.75rem;color: darkgray;text-align: center;padding: 1rem 0;">
                 Will let you know when we're ready. Stay tuned.
             </div>
@@ -103,6 +105,39 @@
 </div> <!-- /container -->
 </body>
 <style>
+    .default {
+        border-width: 1px;
+        color: #9955ff;
+        border-color: #9955ff;
+        box-shadow: 0 2px #00000004;
+        transition: .3s;
+    }
+
+    .default::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        opacity: 0;
+        box-shadow: 0 0 0 8px #9955ff;
+        transition: .3s;
+    }
+
+    .default:hover {
+        color: #b17fff;
+        border-color: #b17fff;
+    }
+
+    .default:active {
+        color: #7634d9;
+        border-color: #7634d9;
+    }
+
+    .default:active::after {
+        box-shadow: none;
+        opacity: 0.4;
+        transition: 0s; /*取消过渡*/
+    }
     body {
         font-family: Montserrat;
     }
