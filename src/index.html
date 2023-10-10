@@ -22,7 +22,7 @@
             $('#process').prop('disabled', true);
 
             $.ajax({
-                url: '{BACKEND_SERVICE_URL}?base_id=appNEswczILgUsxML&table_name=tblmgyDPdFo2crDKh',
+                url: '{BACKEND_SERVICE_URL}?base_id={BASE_ID}&table_name={TABLE_NAME}',
                 type: "post",
                 data: JSON.stringify({Name: clientName, Notes: Notes, Status: "In progress"}),
                 contentType: "application/json",
@@ -47,27 +47,46 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="my-4 text-center">
-        <img src="https://flows.network/logo-with-text.png"
-             width="160"/>
-    </div>
-
-    <form id="draw" enctype="multipart/form-data"></form>
-    <div class="mb-3">
-        <label for="Name" class="form-label small">Enter your Name</label>
-        <input type="text" class="form-control" id="Name">
-    </div>
-    <div class="mb-3">
-        <label for="Notes" class="form-label small">Notes</label>
-        <input type="text" class="form-control" id="Notes">
-    </div>
-    <button type="submit" class="btn btn-primary" id="process" onclick="return callService();">
+<div style="display: flex;justify-content: center;position: relative;height: 100vh;" class="container">
+    <div style="position: absolute;top:0;bottom: 0;margin: auto;height: max-content" class="size">
+        <form class="left" style="display: flex;flex-direction: column;justify-content: space-between;padding: 0 1rem;border: 3px solid #9955FF;" id="draw"
+              enctype="multipart/form-data">
+            <div style="display:flex;justify-content: space-between;line-height: 4rem" class="mb-3">
+                <label style="padding-right: 20px" for="Name" class="form-label small">Enter your Name</label>
+                <input style="align-self: center;" type="text" class="form-control" id="Name">
+            </div>
+            <div style="display:flex;justify-content: space-between;line-height: 4rem" class="mb-3">
+                <label style="padding-right: 20px" for="Email" class="form-label small">Enter your Email</label>
+                <input style="align-self: center;" type="text" class="form-control" id="Email">
+            </div>
+            <button style="background-color: transparent;border-radius: 0.25rem;border: 1px solid #9955ff;font-weight: 600;color:#9955FF;margin-top: 1rem;line-height: 2rem;" type="submit" class="btn btn-primary" id="process" onclick="return callService();">
         <span style="display: none;" class="spinner-border spinner-border-sm" id="loading" role="status"
               aria-hidden="true"></span>
-        submit
-    </button>
-    </form>
+                submit
+            </button>
+            <div style="display: flex;justify-content: center;align-items: center;padding: 1rem 0;">
+                <div>
+                    pover by
+                </div>
+                <img src="https://flows.network/logo-with-text.png"
+                     width="160"/>
+            </div>
+        </form>
+        <div class="right" style="display: flex;flex-direction: column;justify-content: center;background-color: #9955FF;color: white;border: 3px solid #9955FF;">
+            <div style="margin: 1rem 1rem;" class="flex my-5 items-start leading-6">
+                <div>☑️GPT 4</div>
+            </div>
+            <div style="margin: 1rem  1rem;" class="flex my-5 items-start leading-6">
+                <div>☑️Private questions</div>
+            </div>
+            <div style="margin: 1rem  1rem;" class="flex my-5 items-start leading-6">
+                <div>☑️Included questions 200 / month + add-on $8 for 200</div>
+            </div>
+            <div style="margin: 1rem  1rem;" class="flex my-5 items-start leading-6">
+                <div>☑️Invite to your own Discord server</div>
+            </div>
+        </div>
+    </div>
 
     <div style="display: none;" id="success">
         <span style="margin-top: 8px;color:green">Your information has been submitted successfully.</span>
@@ -76,4 +95,26 @@
 
 </div> <!-- /container -->
 </body>
+<style>
+    .size {
+        display: flex;
+    }
+    .left{
+        border-radius: 1rem 0 0 1rem;
+    }
+    .right{
+        border-radius: 0 1rem 1rem 0;
+    }
+    @media (max-width: 800px) {
+        .size {
+            display: block;
+        }
+        .left{
+            border-radius: 1rem 1rem 0 0;
+        }
+        .right{
+            border-radius: 0 0 1rem 1rem;
+        }
+    }
+</style>
 </html>
