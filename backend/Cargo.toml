@@ -1,5 +1,5 @@
 [package]
-name = "lambda-airtable"
+name = "webhook-airtable-backend"
 version = "0.1.0"
 edition = "2021"
 

@@ -1,10 +1,9 @@
 use std::{
     collections::HashMap,
-    env::{self, VarError},
+    env::{self},
 };
 
 use airtable_flows::{create_record, update_record};
-use dotenv::dotenv;
 use flowsnet_platform_sdk::logger;
 use webhook_flows::{create_endpoint, request_handler, send_response};
 
@@ -30,8 +29,6 @@ impl Record<'_> {
 #[no_mangle]
 #[tokio::main(flavor = "current_thread")]
 pub async fn on_deploy() {
-
-
     create_endpoint().await;
 }
 
