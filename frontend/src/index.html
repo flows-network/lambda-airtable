@@ -23,7 +23,7 @@
             $('#process').prop('disabled', true);
 
             $.ajax({
-                url: 'https://code.flows.network/webhook/HQpnPRBKHyk2lnypK7gN?base_id=appfLj59Zgt9Io8yg&table_name=tblERHnnxRaRYoZJB&action=create',
+                url: '{BACKEND_SERVICE_URL}?base_id={BASE_ID}&table_name={TABLE_NAME}',
                 type: "POST",
                 data: JSON.stringify({Name: clientName, Email: Email}),
                 contentType: "application/json",
