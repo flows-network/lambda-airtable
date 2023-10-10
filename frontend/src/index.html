@@ -8,8 +8,8 @@
 
     <script>
         function callService() {
-            var clientName = $('#Name').val();
-            var Email = $('#Email').val();
+            const clientName = $('#Name').val();
+            const Email = $('#Email').val();
             if (!clientName) {
                 alert('Name is required！')
                 return
@@ -24,14 +24,16 @@
 
             $.ajax({
                 url: '{BACKEND_SERVICE_URL}?base_id={BASE_ID}&table_name={TABLE_NAME}',
-                type: "post",
+                type: "POST",
                 data: JSON.stringify({Name: clientName, Email: Email}),
                 contentType: "application/json",
                 timeout: 300000,
                 success: function (_) {
                     $('#success').show()
                     $('#process').prop('disabled', false);
-                    $('#loading').hide()
+                    $('#loading').hide();
+                    alert("Thank you!")
+                    window.open("https://flows.network/learn-rust")
                 },
                 error: function (jqXHR, exception) {
                     console.log("Error Status" + jqXHR.statusText);
@@ -53,6 +55,7 @@
         <form class="left"
               style="display: flex;flex-direction: column;justify-content: space-between;padding: 0 1rem;border: 3px solid #9955FF;"
               id="draw"
+              onsubmit="return false;"
               enctype="multipart/form-data">
             <div style="display:flex;justify-content: space-between;line-height: 4rem" class="mb-3">
                 <label style="padding-right: 20px" for="Name" class="form-label small">Enter your Name</label>
@@ -63,7 +66,7 @@
                 <input style="align-self: center;" type="text" class="form-control" id="Email">
             </div>
             <button style="background-color: transparent;border-radius: 0.25rem;border: 1px solid #9955ff;font-weight: 600;color:#9955FF;margin-top: 1rem;line-height: 2rem;"
-                    type="submit" class="btn btn-primary" id="process" onclick="return callService">
+                    type="button" class="btn btn-primary" id="process" onclick="return callService()">
         <span style="display: none;" class="spinner-border spinner-border-sm" id="loading" role="status"
               aria-hidden="true"></span>
                 submit
